@@ -1,0 +1,44 @@
+<template>
+  <div :class="{ loader: true, fadeout: !isLoading }">
+    <img src="../assets/sneakers.png" alt="" />
+    Sneakers
+  </div>
+</template>
+
+<script>
+export default {
+  name: "LoadingScreen",
+  props: ["isLoading"],
+};
+</script>
+
+<style>
+.loader {
+  background-color: #ab7d63;
+  bottom: 0;
+  color: white;
+  font-size: 32px;
+  left: 0;
+  overflow: hidden;
+  padding-top: 10vh;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fadeout {
+  animation: fadeout 2s forwards;
+}
+
+@keyframes fadeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+</style>
