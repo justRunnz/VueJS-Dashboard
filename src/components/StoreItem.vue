@@ -33,14 +33,19 @@ import { mapStores } from "pinia";
 import {onBeforeMount} from "vue";
 
 export default {
+
   setup() {
     const useStore = useCounterStore();
     const products = useStore.products;
+    const users = useStore.users;
+
     onBeforeMount(() => {
       useStore.fetchProducts();
+      useStore.fetchUsers();
     });
     return {
       products,
+      users,
     };
   },
   computed: {
