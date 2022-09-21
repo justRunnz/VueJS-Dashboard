@@ -2,20 +2,20 @@
   <div id="app">
     <LoadingScreen :isLoading="isLoading" />
     <main v-if="!isLoading">
-      <HelloWorld />
+      <StoreViewVue />
     </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 import LoadingScreen from "./components/LoadingScreen";
+import StoreViewVue from "./views/StoreView.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
     LoadingScreen,
+    StoreViewVue,
   },
   data() {
     return { isLoading: true };
