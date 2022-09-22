@@ -439,8 +439,8 @@ export default {
       selectedProduct: null,
       filteredProducts: [],
       textSearch: "",
-      textSearchPriceMin: "0",
-      textSearchPriceMax: "50000",
+      textSearchPriceMin: null,
+      textSearchPriceMax: null,
       formProduct: {
         id: null,
         name: "",
@@ -529,11 +529,21 @@ export default {
     },
 
     searchProductByPrice() {
-      this.filteredProducts = this.products.filter(
-        (product) =>
-          product.price >= this.textSearchPriceMin &&
-          product.price <= this.textSearchPriceMax
-      );
+      if (this.textSearchPriceMin && this.textSearchPriceMax) {
+        this.filteredProducts = this.products.filter(
+          (product) =>
+            product.price >= this.textSearchPriceMin &&
+            product.price <= this.textSearchPriceMax
+        );
+      } else if (this.textSearchPriceMin) {
+        this.filteredProducts = this.products.filter(
+          (product) => product.price >= this.textSearchPriceMin
+        );
+      } else if (this.textSearchPriceMax) {
+        this.filteredProducts = this.products.filter(
+          (product) => product.price <= this.textSearchPriceMax
+        );
+      }
     },
 
     onChange(event) {
