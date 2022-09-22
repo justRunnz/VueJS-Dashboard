@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <StoreItem/>
+  <div class="right-container">
+    <div class="productContainer">
+      <StoreItem/>
+    </div>
   </div>
 </template>
 
@@ -15,3 +17,16 @@ export default {
   }
 }
 </script>
+
+<style>
+.right-container {
+  display: flex;
+  /*align-items: center ;*/
+  justify-content: center;
+  width: 100%;
+  /*margin-left: 10em;*/
+}
+.productContainer {
+  width: 80%;
+}
+</style>
