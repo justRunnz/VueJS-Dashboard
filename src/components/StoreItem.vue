@@ -112,7 +112,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body relative p-4 flex flex-col">
+          <form class="modal-body relative p-4 flex flex-col">
             <div class="mb-6">
               <div class="mb-6">
                 <label
@@ -222,7 +222,7 @@
                 Add new product
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -248,50 +248,10 @@
           <th scope="col" class="py-3 px-6">Action</th>
         </tr>
       </thead>
-      <tbody v-if="filteredProducts.length !== null">
+      <tbody>
         <tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           v-for="(product, index) in filteredProducts"
-          :key="index"
-        >
-          <th scope="col" class="py-3 px-6">
-            {{ product.id }}
-          </th>
-          <td class="p-4 w-32">
-            <img :src="product.img" alt="Product image" />
-          </td>
-          <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-            {{ product.name }}
-          </td>
-          <td class="py-4 px-6">
-            <div class="flex items-center space-x-3">
-              {{ product.stock }}
-            </div>
-          </td>
-          <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
-            {{ product.price }}€
-          </td>
-          <td class="py-4 px-6">
-            <label
-              class="font-medium text-red-600 dark:text-red-500 hover:underline"
-              @click="deleteProducts(product.id)"
-              >Remove</label
-            >
-            /
-            <label
-              class="font-medium text-blue-600 dark:text-red-500 hover:underline"
-              @click="getProduct(product.id)"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdropModify"
-              >Modify</label
-            >
-          </td>
-        </tr>
-      </tbody>
-      <tbody v-else>
-        <tr
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-          v-for="(product, index) in products"
           :key="index"
         >
           <th scope="col" class="py-3 px-6">
@@ -477,8 +437,8 @@ export default {
   data() {
     return {
       selectedProduct: null,
-      filteredProducts: [],
       textSearch: "",
+      filteredProducts: [],
       textSearchPriceMin: null,
       textSearchPriceMax: null,
       formProduct: {
@@ -607,9 +567,11 @@ export default {
       }
     },
   },
-  async mounted() {
-    this.filteredProducts = this.products;
-    // console.log(this.filteredProducts);
+  mounted() {
+    const res = axios.get("http://localhost:3000/products");
+    res.then((response) => {
+      this.filteredProducts = response.data;
+    });
   },
   computed: {
     ...mapStores(useCounterStore),
