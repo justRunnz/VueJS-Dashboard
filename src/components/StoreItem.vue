@@ -13,6 +13,33 @@
       @keyup="searchProduct()"
     />
 
+    <div class="flex">
+      <input
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="priceMin"
+        type="number"
+        min="0"
+        placeholder="Price Minimum"
+        v-model="textSearchPriceMin"
+      />
+      <input
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="priceMax "
+        type="number"
+        min="0"
+        placeholder="Price Maximal"
+        v-model="textSearchPriceMax"
+      />
+      <input
+        class="inline-block px-2 py-2.5 bg-blue-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        type="button"
+        name="stockMin"
+        min="0"
+        value="Search Price"
+        @click="searchProductByPrice()"
+      />
+    </div>
+
     <!-- Button modal New product -->
     <button
       type="button"
@@ -380,6 +407,8 @@ export default {
       selectedProduct: null,
       filteredProducts: [],
       textSearch: "",
+      textSearchPriceMin: "0",
+      textSearchPriceMax: "50000",
       formProduct: {
         id: null,
         name: "",
@@ -465,7 +494,6 @@ export default {
       this.filteredProducts = this.products.filter(
         (product) =>
           product.name.toLowerCase().includes(this.textSearch.toLowerCase())
-        // product.name.toLowerCase().includes(this.textSearch.toLowerCase())
         // product.description
         //   .toLowerCase()
         //   .includes(this.textSearch.toLowerCase())
@@ -478,6 +506,14 @@ export default {
       );
 
       // console.log(this.textSearch);
+    },
+
+    searchProductByPrice() {
+      this.filteredProducts = this.products.filter(
+        (product) =>
+          product.price >= this.textSearchPriceMin &&
+          product.price <= this.textSearchPriceMax
+      );
     },
   },
   mounted() {
