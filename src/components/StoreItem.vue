@@ -40,6 +40,17 @@
       />
     </div>
 
+    <select
+      id="countries"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      @change="onChange($event)"
+    >
+      <option selected="">Choose a state</option>
+      <option value="inStock">In Stock</option>
+      <option value="outOfStock">Out of Stock</option>
+      <option value="almostOutOfStock">Almost Out of Stock</option>
+    </select>
+
     <!-- Button modal New product -->
     <button
       type="button"
@@ -146,10 +157,10 @@
                   >Price</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   id="price"
                   v-model="formProduct.price"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder=" 436 "
                 />
               </div>
@@ -160,7 +171,7 @@
                   >Stock</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   id="stock"
                   v-model="formProduct.stock"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -350,7 +361,7 @@
                   >Price</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   id="price"
                   v-model="products.price"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -363,7 +374,7 @@
                   >Stock</label
                 >
                 <input
-                  type="text"
+                  type="number"
                   id="stock"
                   v-model="products.stock"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -491,21 +502,9 @@ export default {
     },
 
     searchProduct() {
-      this.filteredProducts = this.products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(this.textSearch.toLowerCase())
-        // product.description
-        //   .toLowerCase()
-        //   .includes(this.textSearch.toLowerCase())
-        // product.price.toLowerCase().includes(this.textSearch.toLowerCase()) ||
-        // product.stock.toLowerCase().includes(this.textSearch.toLowerCase()) ||
-        // product.quantity
-        //   .toLowerCase()
-        //   .includes(this.textSearch.toLowerCase()) ||
-        // product.img.toLowerCase().includes(this.textSearch.toLowerCase())
+      this.filteredProducts = this.products.filter((product) =>
+        product.name.toLowerCase().includes(this.textSearch.toLowerCase())
       );
-
-      // console.log(this.textSearch);
     },
 
     searchProductByPrice() {
@@ -514,6 +513,23 @@ export default {
           product.price >= this.textSearchPriceMin &&
           product.price <= this.textSearchPriceMax
       );
+    },
+
+    onChange(event) {
+      console.log(event.target.value);
+      if (event.target.value == "inStock") {
+        this.filteredProducts = this.products.filter(
+          (product) => product.stock >= 10
+        );
+      } else if (event.target.value == "almostOutOfStock") {
+        this.filteredProducts = this.products.filter(
+          (product) => product.stock <= 10 && product.stock >= 2
+        );
+      } else if (event.target.value == "outOfStock") {
+        this.filteredProducts = this.products.filter(
+          (product) => product.stock <= 0
+        );
+      }
     },
   },
   mounted() {
@@ -545,5 +561,17 @@ export default {
   margin: 2em 0;
   display: flex;
   justify-content: space-between;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>
