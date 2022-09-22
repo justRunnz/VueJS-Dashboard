@@ -10,13 +10,13 @@ export const useCounterStore = defineStore("counter", {
     },
     actions: {
         async fetchProducts() {
-            const products = await fetch("https://1f83-92-174-83-81.eu.ngrok.io/products");
+            const products = await fetch("http://localhost:3000/products");
             const dataProducts = await products.json();
             this.products = dataProducts;
             //   console.log(this.products);
         },
         async fetchUsers() {
-            const users = await fetch("https://1f83-92-174-83-81.eu.ngrok.io/users");
+            const users = await fetch("http://localhost:3000/users");
             const dataClients = await users.json();
             this.users = dataClients;
             //   console.log(this.products);
