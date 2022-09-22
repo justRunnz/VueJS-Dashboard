@@ -28,7 +28,7 @@
                     data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body relative p-4 flex flex-col">
-            <form action="#" class="mb-6">
+            <div  class="mb-6">
               <div class="mb-6">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
                 <input type="text" id="title" v-model="formProduct.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" Air Max " >
@@ -55,9 +55,9 @@
                 <input type="text" id="stock" v-model="formProduct.stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" 123 " >
               </div>
               <button type="submit" class="text-white justify-center flex items-center bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                       @click="AddProducts"><svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                      data-bs-dismiss="modal" data-bs-target="#staticBackdrop" @click="AddProducts"><svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
                 Add new product </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -112,14 +112,67 @@
           {{ product.price }}€
         </td>
         <td class="py-4 px-6">
-          <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline" @click="deleteProducts(product.id)">Remove</a>
+          <label  class="font-medium text-red-600 dark:text-red-500 hover:underline" @click="deleteProducts(product.id)">Remove</label> /
+          <label class="font-medium text-blue-600 dark:text-red-500 hover:underline " @click="getProduct(product.id)" data-bs-toggle="modal" data-bs-target="#staticBackdropModify">Modify</label>
         </td>
       </tr>
 
       </tbody>
     </table>
-  </div>
 
+    <!-- Modal Modify -->
+    <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+         id="staticBackdropModify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog relative w-auto pointer-events-none">
+        <div
+            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+          <div
+              class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+            <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">
+              Modify product
+            </h5>
+            <button type="button"
+                    class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body relative p-4 flex flex-col">
+            <form  class="mb-6 form">
+              <div class="mb-6">
+                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
+                <input type="text" id="title" v-model="products.name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+              </div>
+              <div class="mb-6">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Description</label>
+                <textarea id="description" v-model="products.description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" ></textarea>
+              </div>
+
+              <div class="mb-6">
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image Link</label>
+                <input type="text" id="image" v-model="products.img" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+              </div>
+              <div class="mb-6">
+                <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Color</label>
+                <input type="text" id="color" v-model="products.color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+              </div>
+              <div class="mb-6">
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>
+                <input type="text" id="price" v-model="products.price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+              </div>
+              <div class="mb-6">
+                <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Stock</label>
+                <input type="text" id="stock" v-model="products.stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+              </div>
+              <button class="text-white justify-center flex items-center bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                   @click="updateProduct(products.id)"   ><svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                Modify product {{products.id}}</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -130,6 +183,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      selectedProduct: null,
       formProduct: {
         id: null,
         name: '',
@@ -171,6 +225,46 @@ export default {
         console.log(error);
       });
     },
+
+    updateProduct(id) {
+      axios.put("http://localhost:3000/products/" + id, {
+            name: this.products.name,
+            img: this.products.img,
+            description: this.products.description,
+            color: this.products.color,
+            price: this.products.price,
+            stock: this.products.stock,
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      console.log(this.products);
+      console.log(id);
+      console.log(this.products.name);
+      console.log(this.products.id);
+    },
+
+    getProduct(id) {
+      // const id = this.products[this.selectedProduct].id;
+
+      axios.get("http://localhost:3000/products/" + id).then((response) => {
+        // const product = response.data;
+        this.products.id = response.data.id;
+        this.products.name = response.data.name;
+        this.products.img = response.data.img;
+        this.products.description = response.data.description;
+        this.products.price = response.data.price;
+        this.products.stock = response.data.stock;
+        this.products.color = response.data.color;
+      });
+      console.log(this.products);
+      console.log(this.products[id]);
+    },
+
+
   },
   computed: {
     ...mapStores(useCounterStore),
