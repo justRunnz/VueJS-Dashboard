@@ -39,8 +39,8 @@
               </div>
 
               <div class="mb-6">
-                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Link image</label>
-                <input type="text" id="image" v-model="formProduct.img" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image link" >
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image Link</label>
+                <input type="text" id="image" v-model="formProduct.img" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://www.image-link.png" >
               </div>
               <div class="mb-6">
                 <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Color</label>
