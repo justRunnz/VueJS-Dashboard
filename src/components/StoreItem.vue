@@ -248,10 +248,50 @@
           <th scope="col" class="py-3 px-6">Action</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="filteredProducts.length !== null">
         <tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           v-for="(product, index) in filteredProducts"
+          :key="index"
+        >
+          <th scope="col" class="py-3 px-6">
+            {{ product.id }}
+          </th>
+          <td class="p-4 w-32">
+            <img :src="product.img" alt="Product image" />
+          </td>
+          <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+            {{ product.name }}
+          </td>
+          <td class="py-4 px-6">
+            <div class="flex items-center space-x-3">
+              {{ product.stock }}
+            </div>
+          </td>
+          <td class="py-4 px-6 font-semibold text-gray-900 dark:text-white">
+            {{ product.price }}€
+          </td>
+          <td class="py-4 px-6">
+            <label
+              class="font-medium text-red-600 dark:text-red-500 hover:underline"
+              @click="deleteProducts(product.id)"
+              >Remove</label
+            >
+            /
+            <label
+              class="font-medium text-blue-600 dark:text-red-500 hover:underline"
+              @click="getProduct(product.id)"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdropModify"
+              >Modify</label
+            >
+          </td>
+        </tr>
+      </tbody>
+      <tbody v-else>
+        <tr
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          v-for="(product, index) in products"
           :key="index"
         >
           <th scope="col" class="py-3 px-6">
@@ -526,6 +566,7 @@ export default {
       this.filteredProducts = this.products.filter((product) =>
         product.name.toLowerCase().includes(this.textSearch.toLowerCase())
       );
+      console.log(this.filteredProducts);
     },
 
     searchProductByPrice() {
@@ -543,6 +584,8 @@ export default {
         this.filteredProducts = this.products.filter(
           (product) => product.price <= this.textSearchPriceMax
         );
+      } else {
+        this.filteredProducts = this.products;
       }
     },
 
@@ -564,11 +607,9 @@ export default {
       }
     },
   },
-  mounted() {
-    const res = axios.get("http://localhost:3000/products");
-    res.then((response) => {
-      this.filteredProducts = response.data;
-    });
+  async mounted() {
+    this.filteredProducts = this.products;
+    // console.log(this.filteredProducts);
   },
   computed: {
     ...mapStores(useCounterStore),
