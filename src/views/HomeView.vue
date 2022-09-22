@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home flex">
+    <HelloWorld/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    HelloWorld,
   }
 }
 </script>
