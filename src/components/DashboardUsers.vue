@@ -258,9 +258,8 @@ export default {
         username: "",
         email: "",
         firstname: "",
-        price: null,
-        stock: null,
-        color: "",
+        lastname: "",
+        money: null,
       },
     };
   },
@@ -283,7 +282,7 @@ export default {
     AddnewUser() {
       axios
         .post("http://localhost:3000/users", {
-          id: this.products.slice(-1)[0].id + 1,
+          id: this.users.slice(-1)[0].id + 1,
           username: this.formProduct.username,
           email: this.formProduct.email,
           firstname: this.formProduct.firstname,
