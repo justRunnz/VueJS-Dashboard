@@ -3,7 +3,7 @@
     <h1>Products</h1>
   </div>
 
-  <div div class="newItem">
+  <div class="newItem">
     <!-- Shearch Bar Input Modal -->
 
     <div class="relative">
