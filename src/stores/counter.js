@@ -22,9 +22,14 @@ export const useCounterStore = defineStore("counter", {
         "http://localhost:3000/users?_page=" + this.page + "&_limit=5"
       );
       const dataClients = await users.json();
-       this.totalItem = Math.ceil(users.headers.get("X-Total-Count") / 5);
-       this.products = dataClients;
+      this.totalItem = users.headers.get("X-Total-Count");
       this.users = dataClients;
+      //   console.log(this.products);
+    },
+    async fetchOrders() {
+      const products = await fetch("http://localhost:3000/orders");
+      const dataProducts = await products.json();
+      this.products = dataProducts;
       //   console.log(this.products);
     },
     increment() {

@@ -227,20 +227,41 @@
           </tbody>
         </table>
       </div>
-      <div class="inline-flex justify-center items-center mt-8 w-max">
-        <button
-          @click="prev()"
-          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-        >
-          Prev
-        </button>
-
-        <button
-          @click="next()"
-          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
-        >
-          Next
-        </button>
+      <div
+        v-if="this.counterStore.totalItem >= 5"
+        class="flex flex-col items-center mt-5"
+      >
+        <!-- Help text -->
+        <span class="text-sm text-gray-700 dark:text-gray-400">
+          Showing
+          <span class="font-semibold text-gray-900 dark:text-white">{{
+            this.counterStore.page
+          }}</span>
+          to
+          <span class="font-semibold text-gray-900 dark:text-white">{{
+            Math.ceil(this.counterStore.totalItem / 5)
+          }}</span>
+          of
+          <span class="font-semibold text-gray-900 dark:text-white">{{
+            this.counterStore.totalItem
+          }}</span>
+          Entries
+        </span>
+        <!-- Buttons -->
+        <div class="inline-flex mt-2 xs:mt-0">
+          <button
+            @click="prev()"
+            class="py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Prev
+          </button>
+          <button
+            @click="next()"
+            class="py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -303,7 +324,7 @@ export default {
       }
     },
     next() {
-      if (this.counterStore.products.length == 5) {
+      if (this.counterStore.users.length == 5) {
         this.counterStore.increment();
       }
     },
