@@ -57,7 +57,7 @@
         <td class="py-4 px-6">
           <label
               class="font-medium text-red-600 dark:text-red-500 hover:underline"
-              @click="deleteProducts(orders.id)"
+              @click="deleteOrder(orders.id)"
           >Remove</label
           >
           /
@@ -79,8 +79,20 @@
 
 import {mapState, mapStores} from "pinia";
 import {useCounterStore} from "@/stores/counter";
+import axios from "axios";
 
 export default {
+  methods: {
+    deleteOrder(orderId) {
+      var response = confirm("Etes vous sur ?");
+      if (response) {
+        axios.delete(`http://localhost:3000/orders/${orderId}`).then(() => {
+          let i = this.orders.map((data) => data.id).indexOf(orderId);
+          this.orders.splice(i, 1);
+        });
+      }
+    },
+  },
   computed: {
     ...mapStores(useCounterStore),
     ...mapState(useCounterStore, ["products", "users", "orders"]),
