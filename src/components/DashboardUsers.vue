@@ -47,7 +47,7 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <form class="modal-body relative p-4 flex flex-col">
+              <div class="modal-body relative p-4 flex flex-col">
                 <div class="mb-6">
                   <div class="mb-6">
                     <label
@@ -138,6 +138,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       class="feather feather-user"
+                      data-bs-dismiss="modal"
                     >
                       <path
                         d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
@@ -147,7 +148,7 @@
                     Add new users
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

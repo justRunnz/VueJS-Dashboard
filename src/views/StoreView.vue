@@ -24,7 +24,7 @@ export default {
   /*align-items: center ;*/
   justify-content: center;
   width: 100%;
-  /*margin-left: 10em;*/
+  margin-bottom: 2rem;
 }
 .productContainer {
   width: 80%;
