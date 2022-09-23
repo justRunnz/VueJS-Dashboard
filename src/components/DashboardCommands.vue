@@ -161,15 +161,15 @@
             <form class="mb-6 form">
               <div class="mb-6">
                 <label
-                  for="status"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-                  >Select an Status</label
+                    for="status"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                >Select an Status</label
                 >
                 <select
-                  type="number"
-                  v-model="orders.status"
-                  id="status"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="number"
+                    v-model="orders.status"
+                    id="status"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   <option selected>Choose a status</option>
                   <option value="0">Payed</option>
@@ -178,20 +178,20 @@
                 </select>
               </div>
               <button
-                class="text-white justify-center flex items-center bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                @click="updateOrders(orders.id)"
+                  class="text-white justify-center flex items-center bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  @click="updateOrders(orders.id)"
               >
                 <svg
-                  aria-hidden="true"
-                  class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-                    clip-rule="evenodd"
+                      fill-rule="evenodd"
+                      d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                      clip-rule="evenodd"
                   ></path>
                 </svg>
                 Modify status {{ orders.id }}
@@ -214,15 +214,15 @@ export default {
     updateOrders(id) {
       console.log("status ma gl" + this.orders.status);
       axios
-        .patch("http://localhost:3000/orders/" + id, {
-          status: parseInt(this.orders.status),
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          .patch("http://localhost:3000/orders/" + id, {
+            status: parseInt(this.orders.status),
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       // console.log(this.products);
       // console.log(id);
       // console.log(this.products.name);
