@@ -6,6 +6,7 @@ export const useCounterStore = defineStore("counter", {
     return {
       products: [],
       users: [],
+      orders: [],
       page: 1,
       totalItem: 0,
     };
@@ -27,10 +28,11 @@ export const useCounterStore = defineStore("counter", {
       //   console.log(this.products);
     },
     async fetchOrders() {
-      const products = await fetch("http://localhost:3000/orders");
-      const dataProducts = await products.json();
-      this.products = dataProducts;
-      //   console.log(this.products);
+      const orders = await fetch("http://localhost:3000/orders");
+      const dataOrders = await orders.json();
+      this.orders = dataOrders;
+        console.log(this.orders);
+        console.log(this.orders[0].products[0].product_id);
     },
     increment() {
       this.page++;
