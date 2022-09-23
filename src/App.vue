@@ -1,21 +1,20 @@
 <template>
-
-  <Header/>
+  <Header />
   <div class="container-content flex">
     <nav>
-      <SideBar/>
+      <SideBar />
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 
-  <div id="loadingScreen">
+  <!-- <div id="loadingScreen">
     <LoadingScreen :isLoading="isLoading" />
     <main v-if="!isLoading"></main>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import LoadingScreen from "./components/LoadingScreen";
+// import LoadingScreen from "./components/LoadingScreen";
 import SideBar from "./components/SideBar";
 import Header from "@/components/HeaderComponent";
 
@@ -23,7 +22,7 @@ export default {
   name: "App",
   components: {
     Header,
-    LoadingScreen,
+    // LoadingScreen,
     SideBar,
   },
   data() {
@@ -48,7 +47,7 @@ export default {
   color: #2c3e50;
 }
 .container-content {
-  width: 100% ;
+  width: 100%;
   min-height: 95vh;
 }
 </style>
