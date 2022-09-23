@@ -9,6 +9,8 @@ export const useCounterStore = defineStore("counter", {
       orders: [],
       page: 1,
       totalItem: 0,
+      pageOrder: 1,
+      totalOrder: 0,
     };
   },
   actions: {
@@ -28,11 +30,14 @@ export const useCounterStore = defineStore("counter", {
       //   console.log(this.products);
     },
     async fetchOrders() {
-      const orders = await fetch("http://localhost:3000/orders");
+      const orders = await fetch(
+        "http://localhost:3000/orders?_page=" + this.pageOrder + "&_limit=5"
+      );
       const dataOrders = await orders.json();
+      this.totalOrder = orders.headers.get("X-Total-Count");
       this.orders = dataOrders;
-        console.log(this.orders);
-        console.log(this.orders[0].products[0].product_id);
+      // console.log(this.orders);
+      // console.log(this.orders[0].products[0].product_id);
     },
     increment() {
       this.page++;
@@ -41,6 +46,14 @@ export const useCounterStore = defineStore("counter", {
     decrement() {
       this.page--;
       this.fetchUsers();
+    },
+    incrementOrder() {
+      this.pageOrder++;
+      this.fetchOrders();
+    },
+    decrementOrder() {
+      this.pageOrder--;
+      this.fetchOrders();
     },
   },
 });

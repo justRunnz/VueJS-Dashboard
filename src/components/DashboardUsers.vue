@@ -227,6 +227,7 @@
           </tbody>
         </table>
       </div>
+      <!-- PAGINATION USERS -->
       <div
         v-if="this.counterStore.totalItem >= 5"
         class="flex flex-col items-center mt-5"
