@@ -245,7 +245,7 @@
           <span class="font-semibold text-gray-900 dark:text-white">{{
             this.counterStore.totalItem
           }}</span>
-          Entries
+         Total of Users
         </span>
         <!-- Buttons -->
         <div class="inline-flex mt-2 xs:mt-0">
